@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t bgorhoball/client-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run bgorhoball/client-test npm run test -- --coverage --watchAll=false
+
+after_success:
+  - docker build -t bgorhoball/advanced-app-client ./client
+  - docker build -t bgorhoball/advanced-app-nginx ./nginx
+  - docker build -t bgorhoball/advanced-app-server ./server
+  - docker build -t bgorhoball/advanced-app-worker ./worker
+  # Login to Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Push the images to docker hub
+  - docker push bgorhoball/advanced-app-client
+  - docker push bgorhoball/advanced-app-nginx
+  - docker push bgorhoball/advanced-app-server
+  - docker push bgorhoball/advanced-app-worker
