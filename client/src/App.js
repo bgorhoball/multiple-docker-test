@@ -11,7 +11,7 @@ function App() {
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <h1>Hello</h1>
+            <h1>Updated!!!!!</h1>
             <Link to="/">Home</Link>
             <Link to="/other_page">Other Page</Link>
           </header>
