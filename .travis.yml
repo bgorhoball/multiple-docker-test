@@ -13,6 +13,8 @@ after_success:
   - docker build -t bgorhoball/advanced-app-nginx ./nginx
   - docker build -t bgorhoball/advanced-app-server ./server
   - docker build -t bgorhoball/advanced-app-worker ./worker
+  # Logout
+  - docker logout
   # Login to Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push the images to docker hub
